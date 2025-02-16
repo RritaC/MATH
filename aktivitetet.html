@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktivitetet - Klubi i Matematikës</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-white text-gray-700 py-4 fixed w-full top-0 left-0 z-20 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 hover:text-[#D42027] transition">
+                <img src="logo.png" alt="Logo" class="h-8">
+                <span class="text-2xl font-bold cursor-pointer">Klubi i Matematikës</span>
+            </a>
+            <div class="space-x-6">
+                <a href="cards.html" class="hover:text-[#D42027] transition">Kartat Interaktive</a>
+                <a href="materiale.html" class="hover:text-[#D42027] transition">Materiale</a>
+                <a href="videos.html" class="hover:text-[#D42027] transition">Video</a>
+                <a href="leaderboard.html" class="hover:text-[#D42027] transition">Tabela e Pikëve</a>
+                <a href="aktivitetet.html" class="font-bold text-[#D42027]">Aktivitetet</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto py-24 text-center">
+        <h1 class="text-5xl font-bold text-gray-800">Aktivitetet & Eventet</h1>
+        <p class="mt-4 text-xl text-gray-600">Shikoni çfarë kemi bërë dhe çfarë po planifikojmë për të ardhmen!</p>
+    </section>
+
+    
+
+    <!-- Upcoming Events -->
+    <section class="container mx-auto py-12">
+        <h2 class="text-3xl font-bold text-center mb-8">🚀 Eventet e Ardhshme</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Upcoming Event 1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://maths2017.wordpress.com/wp-content/uploads/2018/10/ex03.png" class="w-full h-40 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Turneu i Ekuacioneve</h3>
+                    <p class="text-gray-600 mt-2">Një garë me ekuacione sfiduese për të gjithë nxënësit.</p>
+                    <span class="block text-gray-500 mt-2">📅 20 Mars 2025</span>
+                    <button onclick="openSignUpForm('Turneu i Ekuacioneve')" class="bg-[#D42027] text-white py-2 px-6 rounded mt-4 hover:bg-[#A61C1F] transition w-full">
+                        📌 Regjistrohu
+                    </button>
+                    
+                </div>
+            </div>
+
+            <!-- Upcoming Event 2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://i.ytimg.com/vi/mE9UbPnEva0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBuVF6amssQvVfEEFgYNospFm4gUA" alt="Upcoming Event Image" class="w-full h-40 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Trigonometria: për fëmijë</h3>
+                    <p class="text-gray-600 mt-2">Një garë me ekuacione sfiduese për të gjithë nxënësit.</p>
+                    <span class="block text-gray-500 mt-2">📅 20 Mars 2025</span>
+                    <button onclick="openSignUpForm('Trigonometri: për fëmijë')" class="bg-[#D42027] text-white py-2 px-6 rounded mt-4 hover:bg-[#A61C1F] transition w-full">
+                        📌 Regjistrohu
+                    </button>
+                    
+                </div>
+            </div>
+
+            <!-- Upcoming Event 3 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://miro.medium.com/v2/resize:fit:923/1*SsN2DG__Z5DyOI0uf7hbwQ.png" alt="Upcoming Event Image" class="w-full h-40 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Teorema e Pitagorës: SI?</h3>
+                    <p class="text-gray-600 mt-2">Një garë me ekuacione sfiduese për të gjithë nxënësit.</p>
+                    <span class="block text-gray-500 mt-2">📅 20 Mars 2025</span>
+                    <button onclick="openSignUpForm('Teorema e Pitagorës: SI?')" class="bg-[#D42027] text-white py-2 px-6 rounded mt-4 hover:bg-[#A61C1F] transition w-full">
+                        📌 Regjistrohu
+                    </button>
+                    
+                </div>
+            </div>
+
+
+        </div>
+
+        
+    </section>
+
+    <!-- Events Grid -->
+    <section class="container mx-auto py-12">
+        <h2 class="text-3xl font-bold text-center mb-8">📅 Aktivitetet e Fundit</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Event 1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://dariusforoux.com/wp-content/uploads/2017/09/life-is-math.png" alt="Event Image" class="w-full h-40 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Matematika në Jetën e Përditshme</h3>
+                    <p class="text-gray-600 mt-2">Një punëtori ku mësuam aplikimet praktike të matematikës.</p>
+                    <span class="block text-gray-500 mt-2">📅 10 Shkurt 2025</span>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://www.quantamagazine.org/wp-content/uploads/2020/09/IMO_2880x1620_Lede.jpg" alt="Event Image" class="w-full h-40 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Gara e Matematikës</h3>
+                    <p class="text-gray-600 mt-2">Një garë ku nxënësit sfiduan njëri-tjetrin në probleme komplekse.</p>
+                    <span class="block text-gray-500 mt-2">📅 25 Janar 2025</span>
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://cms-tc.pbskids.org/parents/articles/When-to-Get-a-Math-Tutor-for-Your-Child.jpg" alt="Event Image" class="w-full h-40 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Sesioni i Ndihmës për Teste</h3>
+                    <p class="text-gray-600 mt-2">Mësuam së bashku për testin e ardhshëm dhe ndihmuam njëri-tjetrin.</p>
+                    <span class="block text-gray-500 mt-2">📅 15 Janar 2025</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sign-Up Modal -->
+<div id="signUpModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center w-[500px]">
+        <h2 class="text-2xl font-bold text-[#1E3A5F]">📌 Regjistrohu për Eventin</h2>
+        <p class="text-gray-600 mt-2">Shkruani emrin tuaj dhe klikoni "Gjenero Email" për të marrë tekstin e regjistrimit!</p>
+
+        <!-- Hidden field for activity name -->
+        <input type="hidden" id="eventName">
+
+        <input type="text" id="nameInput" placeholder="Shkruani emrin tuaj" 
+               class="w-full p-3 border rounded mt-4 text-lg">
+
+        <button onclick="generateEmailText()" class="bg-[#D42027] text-white py-3 px-6 rounded mt-4 hover:bg-[#A61C1F] transition w-full text-lg">
+            📝 Gjenero Email
+        </button>
+
+        <!-- Display Generated Email Text -->
+        <textarea id="emailText" class="w-full p-3 border rounded mt-4 text-lg bg-gray-100 h-32 hidden" readonly></textarea>
+
+        <button onclick="copyToClipboard()" id="copyButton" class="bg-[#1E3A5F] text-white py-3 px-6 rounded mt-4 hover:bg-[#162A45] transition w-full text-lg hidden">
+            📋 Kopjo Emailin
+        </button>
+
+        <p class="text-[#A6A6A6] text-sm mt-2 hidden" id="copiedMessage">✅ Emaili u kopjua! Ju lutem dërgoni atë në <b class="text-[#D42027]">math@mileniumi3.net</b>.</p>
+
+        <button class="mt-4 text-gray-500 hover:text-gray-700 text-lg" onclick="closeSignUpForm()">❌ Mbylle</button>
+    </div>
+</div>
+
+<script>
+    function openSignUpForm(eventName) {
+        // Clear inputs before showing modal
+        document.getElementById("nameInput").value = "";
+        document.getElementById("emailText").value = "";
+        document.getElementById("emailText").classList.add("hidden");
+        document.getElementById("copyButton").classList.add("hidden");
+        document.getElementById("copiedMessage").classList.add("hidden");
+
+        // Set event name
+        document.getElementById("eventName").value = eventName;
+
+        // Show modal
+        document.getElementById("signUpModal").classList.remove("hidden");
+    }
+
+    function closeSignUpForm() {
+        document.getElementById("signUpModal").classList.add("hidden");
+    }
+
+    function generateEmailText() {
+        const name = document.getElementById("nameInput").value.trim();
+        const eventName = document.getElementById("eventName").value;
+
+        if (name === "") {
+            alert("Ju lutem shkruani emrin tuaj!");
+            return;
+        }
+
+        if (eventName === "") {
+            alert("Gabim: Emri i eventit mungon!");
+            return;
+        }
+
+        const emailText = `Pershendetje,\n\nUne, ${name}, dua të marr pjesë në aktivitetin "${eventName}". \nJu lutem më regjistroni për këtë event.\n\nFaleminderit,\n${name}`;
+        
+        document.getElementById("emailText").value = emailText;
+        document.getElementById("emailText").classList.remove("hidden");
+        document.getElementById("copyButton").classList.remove("hidden");
+        document.getElementById("copiedMessage").classList.add("hidden");
+    }
+
+    function copyToClipboard() {
+        const emailText = document.getElementById("emailText");
+        emailText.select();
+        document.execCommand("copy");
+
+        document.getElementById("copiedMessage").classList.remove("hidden");
+    }
+</script>
+
+
+
+
+
+</body>
+
+<!-- Footer -->
+<footer class="bg-[#1E3A5F] text-white py-8 mt-16">
+    <div class="container mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left">
+        <!-- Column 1: About -->
+        <div>
+            <h3 class="text-2xl font-bold mb-4">Klubi i Matematikës</h3>
+            <p class="text-gray-300">
+                Një vend ku matematika bëhet argëtuese dhe sfiduese! 
+                Mësoni, praktikoni dhe garoni për të përmirësuar aftësitë tuaja.
+            </p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Linqe të Shpejta</h3>
+            <ul class="space-y-2">
+                <li><a href="index.html" class="hover:text-[#D42027] transition">🏠 Kreu</a></li>
+                <li><a href="cards.html" class="hover:text-[#D42027] transition">📖 Kartat Interaktive</a></li>
+                <li><a href="materiale.html" class="hover:text-[#D42027] transition">📝 Materiale</a></li>
+                <li><a href="leaderboard.html" class="hover:text-[#D42027] transition">🏆 Tabela e Pikëve</a></li>
+                <li><a href="aktivitetet.html" class="hover:text-[#D42027] transition">📅 Aktivitetet</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3: Contact Info -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Na Kontaktoni</h3>
+            <p class="text-gray-300">📧 Email: <a href="mailto:math@mileniumi3.net" class="text-[#D42027] font-semibold hover:underline">math@mileniumi3.net</a></p>
+            <p class="text-gray-300">📍 Adresa: Prishtinë, Kosovë</p>
+        </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="text-center text-gray-400 text-sm mt-8 border-t border-gray-600 pt-4">
+        © 2025 Klubi i Matematikës | Të gjitha të drejtat e rezervuara.
+    </div>
+</footer>
+
+</html>

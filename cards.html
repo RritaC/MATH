@@ -7,16 +7,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .hidden { display: none; }
-        .card {
-            perspective: 1000px;
+        .card-container {
+            perspective: 1200px;
+            width: 400px;
+            height: 300px;
         }
-        .card-inner {
+        .card {
             width: 100%;
             height: 100%;
-            transition: transform 0.8s;
+            position: relative;
             transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
         }
-        .card:hover .card-inner {
+        .flipped {
             transform: rotateY(180deg);
         }
         .card-front, .card-back {
@@ -24,97 +28,192 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        .card-front {
+            background: #D42027;
+            color: white;
         }
         .card-back {
+            background: #1E3A5F;
+            color: white;
             transform: rotateY(180deg);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-100 text-gray-800">
 
-    <!-- Navigimi -->
+    <!-- Navigation -->
     <nav class="bg-white text-gray-700 py-4 fixed w-full top-0 left-0 z-20 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <!-- Logo Section -->
-            <div class="flex items-center space-x-4">
+            <a href="index.html" class="flex items-center space-x-2 hover:text-[#D42027] transition">
                 <img src="logo.png" alt="Logo" class="h-8">
-                <div class="text-2xl font-bold hover:text-[#D42027] cursor-pointer">Klubi i Matematikës</div>
-            </div>
+                <span class="text-2xl font-bold cursor-pointer">Klubi i Matematikës</span>
+            </a>
             <div class="space-x-6">
-                <a href="index.html" class="hover:text-[#D42027] transition">Kreu</a>
-                <a href="cards.html" class="hover:text-[#D42027] transition">Kartat Interaktive</a>
-                <a href="quizzes.html" class="hover:text-[#D42027] transition">Kuize</a>
+                <a href="cards.html" class="font-bold text-[#D42027]">Kartat Interaktive</a>
+                <a href="materiale.html" class="hover:text-[#D42027] transition">Materiale</a>
                 <a href="videos.html" class="hover:text-[#D42027] transition">Video</a>
                 <a href="leaderboard.html" class="hover:text-[#D42027] transition">Tabela e Pikëve</a>
+                <a href="aktivitetet.html" class="hover:text-[#D42027] transition">Aktivitetet</a>
             </div>
         </div>
     </nav>
 
-    <!-- Seksioni i klasave -->
-    <section class="container mx-auto py-16 mt-12">
+    <!-- Flashcards Section -->
+    <section class="container mx-auto py-20 mt-16">
         <h2 class="text-4xl font-bold text-center text-gray-800 mb-10">Kartat Interaktive</h2>
+
+        <!-- Class Selection -->
         <div class="flex justify-center space-x-4 mb-10">
             <button onclick="selectClass('klasa5')" class="bg-red-500 text-white py-2 px-6 rounded-full hover:bg-red-700 transition">Klasa 5</button>
             <button onclick="selectClass('klasa6')" class="bg-gray-500 text-white py-2 px-6 rounded-full hover:bg-gray-700 transition">Klasa 6</button>
             <button onclick="selectClass('klasa7')" class="bg-gray-500 text-white py-2 px-6 rounded-full hover:bg-gray-700 transition">Klasa 7</button>
         </div>
 
-        <!-- Kapitulli dhe kartat për Klasa 5 -->
-        <div id="klasa5" class="">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Kapitulli: Boshte Numerik</h3>
-            <div class="flex justify-between items-center">
-                <button onclick="prevCard()" class="text-2xl p-2 bg-gray-300 rounded-full hover:bg-gray-500">⬅️</button>
-                <div class="card w-80 h-64 relative bg-gray-200 rounded-lg overflow-hidden">
-                    <div class="card-inner">
-                        <!-- Front Side -->
-                        <div class="card-front bg-blue-500 text-white flex items-center justify-center p-6">
-                            <h3 class="text-2xl font-bold text-center">BOSHTI NUMERIK</h3>
-                            <p class="mt-2">Trego për emërtimin e boshtit X dhe Y.</p>
-                        </div>
-                        <!-- Back Side -->
-                        <div class="card-back bg-gray-100 p-6 flex flex-col justify-between">
-                            <h3 class="text-xl font-semibold text-gray-800">Përgjigjja:</h3>
-                            <p class="mt-2 text-gray-600 text-center">X → Abshisa, Y → Ordinata</p>
-                            <div class="flex justify-center space-x-4 mt-4">
-                                <button class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">❌</button>
-                                <button class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">✅</button>
-                            </div>
+        <!-- Points Display -->
+        <div class="text-center mb-6">
+            <h3 class="text-2xl font-semibold text-gray-800">Pikët tuaja: <span id="score" class="text-[#D42027] font-bold">0</span></h3>
+        </div>
+
+        <!-- Flashcard Deck -->
+        <div class="flex items-center justify-center space-x-6">
+            <button onclick="prevCard()" class="text-3xl p-2 bg-gray-300 rounded-full hover:bg-gray-500">⬅️</button>
+
+            <!-- Flashcard -->
+            <div class="card-container" onclick="flipCard()">
+                <div class="card" id="flashcard">
+                    <!-- Front Side -->
+                    <div class="card-front">
+                        <h3 id="question">BOSHTI NUMERIK</h3>
+                        <p id="hint" class="mt-2">Trego për emërtimin e boshtit X dhe Y.</p>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="card-back">
+                        <h3>Përgjigjja:</h3>
+                        <p id="answer" class="mt-2">X → Abshisa, Y → Ordinata</p>
+                        <div class="flex justify-center space-x-4 mt-4">
+                            <button onclick="updateScore(false, event)" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">❌ Gabim</button>
+                            <button onclick="updateScore(true, event)" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">✅ Saktë</button>
                         </div>
                     </div>
                 </div>
-                <button onclick="nextCard()" class="text-2xl p-2 bg-gray-300 rounded-full hover:bg-gray-500">➡️</button>
             </div>
-        </div>
 
-        <!-- Placeholder për klasa të tjera -->
-        <div id="klasa6" class="hidden">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Kapitulli për Klasën 6</h3>
-            <p>Shfaq përmbajtje për klasën 6 këtu.</p>
-        </div>
-        <div id="klasa7" class="hidden">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Kapitulli për Klasën 7</h3>
-            <p>Shfaq përmbajtje për klasën 7 këtu.</p>
+            <button onclick="nextCard()" class="text-3xl p-2 bg-gray-300 rounded-full hover:bg-gray-500">➡️</button>
         </div>
     </section>
 
     <script>
-        // Menaxhimi i klasave
+        let currentCardIndex = 0;
+        let score = 0;
+
+        const flashcards = [
+            {
+                question: "BOSHTI NUMERIK",
+                hint: "Trego për emërtimin e boshtit X dhe Y.",
+                answer: "X → Abshisa, Y → Ordinata"
+            },
+            {
+                question: "NUMRAT NATYRORË",
+                hint: "Cilat janë numrat natyrorë?",
+                answer: "Numrat 0, 1, 2, 3, 4, 5, ..."
+            },
+            {
+                question: "NUMRAT RACIONALE",
+                hint: "Çfarë janë numrat racionalë?",
+                answer: "Numrat që mund të shkruhen si a/b ku a dhe b janë numra të plotë."
+            }
+        ];
+
+        function flipCard() {
+            document.getElementById("flashcard").classList.toggle("flipped");
+        }
+
+        function updateCard() {
+            document.getElementById("question").innerText = flashcards[currentCardIndex].question;
+            document.getElementById("hint").innerText = flashcards[currentCardIndex].hint;
+            document.getElementById("answer").innerText = flashcards[currentCardIndex].answer;
+        }
+
+        function prevCard() {
+            currentCardIndex = (currentCardIndex - 1 + flashcards.length) % flashcards.length;
+            updateCard();
+        }
+
+        function nextCard() {
+            currentCardIndex = (currentCardIndex + 1) % flashcards.length;
+            updateCard();
+        }
+
+        function updateScore(correct, event) {
+            event.stopPropagation(); // Prevent flipping while clicking answer buttons
+
+            if (correct) {
+                score += 10;
+            } else {
+                score -= 5;
+            }
+
+            document.getElementById("score").innerText = score;
+        }
+
         function selectClass(selectedClass) {
             document.querySelectorAll('[id^="klasa"]').forEach((el) => el.classList.add('hidden'));
             document.getElementById(selectedClass).classList.remove('hidden');
         }
 
-        // Placeholder për kalimin mes kartave (mund të zgjeroni më tej këtë pjesë)
-        function prevCard() {
-            alert('Kartë e mëparshme (placeholder)');
-        }
-
-        function nextCard() {
-            alert('Kartë e ardhshme (placeholder)');
-        }
+        // Initialize first card
+        updateCard();
     </script>
 
 </body>
+
+<!-- Footer -->
+<footer class="bg-[#1E3A5F] text-white py-8 mt-16">
+    <div class="container mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left">
+        <!-- Column 1: About -->
+        <div>
+            <h3 class="text-2xl font-bold mb-4">Klubi i Matematikës</h3>
+            <p class="text-gray-300">
+                Një vend ku matematika bëhet argëtuese dhe sfiduese! 
+                Mësoni, praktikoni dhe garoni për të përmirësuar aftësitë tuaja.
+            </p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Linqe të Shpejta</h3>
+            <ul class="space-y-2">
+                <li><a href="index.html" class="hover:text-[#D42027] transition">🏠 Kreu</a></li>
+                <li><a href="cards.html" class="hover:text-[#D42027] transition">📖 Kartat Interaktive</a></li>
+                <li><a href="materiale.html" class="hover:text-[#D42027] transition">📝 Materiale</a></li>
+                <li><a href="leaderboard.html" class="hover:text-[#D42027] transition">🏆 Tabela e Pikëve</a></li>
+                <li><a href="aktivitetet.html" class="hover:text-[#D42027] transition">📅 Aktivitetet</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3: Contact Info -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Na Kontaktoni</h3>
+            <p class="text-gray-300">📧 Email: <a href="mailto:math@mileniumi3.net" class="text-[#D42027] font-semibold hover:underline">math@mileniumi3.net</a></p>
+            <p class="text-gray-300">📍 Adresa: Prishtinë, Kosovë</p>
+        </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="text-center text-gray-400 text-sm mt-8 border-t border-gray-600 pt-4">
+        © 2025 Klubi i Matematikës | Të gjitha të drejtat e rezervuara.
+    </div>
+</footer>
+
 </html>

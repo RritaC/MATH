@@ -8,20 +8,19 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Navigimi -->
+    <!-- Navigation -->
     <nav class="bg-white text-gray-700 py-4 fixed w-full top-0 left-0 z-20 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <!-- Logo Section -->
-            <div class="flex items-center space-x-4">
+            <a href="index.html" class="flex items-center space-x-2 hover:text-[#D42027] transition">
                 <img src="logo.png" alt="Logo" class="h-8">
-                <div class="text-2xl font-bold hover:text-[#D42027] cursor-pointer">Klubi i Matematikës</div>
-            </div>
+                <span class="text-2xl font-bold cursor-pointer">Klubi i Matematikës</span>
+            </a>
             <div class="space-x-6">
-                <a href="index.html" class="hover:text-[#D42027] transition">Kreu</a>
                 <a href="cards.html" class="hover:text-[#D42027] transition">Kartat Interaktive</a>
-                <a href="quizzes.html" class="hover:text-[#D42027] transition">Kuize</a>
+                <a href="materiale.html" class="hover:text-[#D42027] transition">Materiale</a>
                 <a href="videos.html" class="hover:text-[#D42027] transition">Video</a>
                 <a href="leaderboard.html" class="hover:text-[#D42027] transition">Tabela e Pikëve</a>
+                <a href="aktivitetet.html" class="hover:text-[#D42027] transition">Aktivitetet</a>
             </div>
         </div>
     </nav>
@@ -38,62 +37,105 @@
                     <a href="videos.html" class="ml-4 bg-[#8C8C8E] text-white py-3 px-6 rounded-lg shadow-lg hover:bg-[#606061] transition">Shiko Video</a>
                 </div>
             </div>
-            <!-- Right Side Image -->
-            <div class="md:w-1/2 mt-10 md:mt-0">
-                <img src="https://source.unsplash.com/600x400/?math,students"  class="rounded-lg shadow-md">
-            </div>
+                <!-- Right Side Image -->
+                <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+                    <img src="https://cdn-icons-png.freepik.com/512/3485/3485119.png"  
+                     class="rounded-lg max-w-xs">
+                </div>
         </div>
     </section>
 
     <!-- Seksioni Rreth Klub -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto text-center">
-            <h2 class="text-4xl font-bold text-gray-800">Çfarë mund të bëni këtu?</h2>
-            <p class="mt-4 text-gray-600 text-lg">Eksploroni burime të ndryshme që ju ndihmojnë të zotëroni matematikën:</p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
-                <!-- Kartat Interaktive -->
-                <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
-                    <div class="flex justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#D42027]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8c0-1.1-.9-2-2-2H8a2 2 0 00-2 2v8c0 1.1.9 2 2 2h6a2 2 0 002-2V8zm0 0V5a2 2 0 00-2-2H8a2 2 0 00-2 2v3m6 10h6m-3-3v6" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#D42027]">Kartat Interaktive</h3>
-                    <p class="mt-2 text-gray-600">Praktikoni problemet me udhëzime hap pas hapi.</p>
+<section class="py-16 bg-white">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-bold text-gray-800">Çfarë mund të bëni këtu?</h2>
+        <p class="mt-4 text-gray-600 text-lg">
+            Eksploroni burime të ndryshme që ju ndihmojnë të zotëroni matematikën:
+        </p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
+            <!-- Kartat Interaktive -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                <div class="flex justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#D42027]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16v16H4zM9 8h6M9 12h6m-3 4h3" />
+                    </svg>
                 </div>
-                <!-- Kuize -->
-                <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
-                    <div class="flex justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#D42027]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-4a9.98 9.98 0 01-.611 3.014m-1.432 3.6A10.005 10.005 0 015 20.435M9 12h.01M9 12H5.878m-1.2-.858A9.958 9.958 0 015 3.056" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#D42027]">Kuize</h3>
-                    <p class="mt-2 text-gray-600">Testoni njohuritë me kuize argëtuese.</p>
+                <h3 class="text-xl font-semibold text-[#D42027]">Kartat Interaktive</h3>
+                <p class="mt-2 text-gray-600">Praktikoni problemet me udhëzime hap pas hapi.</p>
+            </div>
+            <!-- Kuize -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                <div class="flex justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#D42027]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3v2M12 9v2M12 15v6M9 6h6M9 12h6M9 18h6" />
+                    </svg>
                 </div>
-                <!-- Video Mësimore -->
-                <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
-                    <div class="flex justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#D42027]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h8m-4 4h4" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#D42027]">Video Mësimore</h3>
-                    <p class="mt-2 text-gray-600">Mësoni nga videot mësimore të rekomanduara nga mësuesit.</p>
+                <h3 class="text-xl font-semibold text-[#D42027]">Kuize</h3>
+                <p class="mt-2 text-gray-600">Testoni njohuritë me kuize argëtuese.</p>
+            </div>
+            <!-- Video Mësimore -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                <div class="flex justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#D42027]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 3v18l15-9z" />
+                    </svg>
                 </div>
-                <!-- Tabela e Pikëve -->
-                <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
-                    <div class="flex justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#D42027]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c3.866 0 7 3.134 7 7s-3.134 7-7 7-7-3.134-7-7 3.134-7 7-7zm0 0V3m0 5V4" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#D42027]">Tabela e Pikëve</h3>
-                    <p class="mt-2 text-gray-600">Garoni me shokët dhe ngjituni në krye të tabelës!</p>
+                <h3 class="text-xl font-semibold text-[#D42027]">Video Mësimore</h3>
+                <p class="mt-2 text-gray-600">Mësoni nga videot mësimore të rekomanduara nga mësuesit.</p>
+            </div>
+            <!-- Tabela e Pikëve -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                <div class="flex justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#D42027]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L15 8h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" />
+                    </svg>
                 </div>
+                <h3 class="text-xl font-semibold text-[#D42027]">Tabela e Pikëve</h3>
+                <p class="mt-2 text-gray-600">Garoni me shokët dhe ngjituni në krye të tabelës!</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
 </body>
+
+<!-- Footer -->
+<footer class="bg-[#1E3A5F] text-white py-8 mt-16">
+    <div class="container mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left">
+        <!-- Column 1: About -->
+        <div>
+            <h3 class="text-2xl font-bold mb-4">Klubi i Matematikës</h3>
+            <p class="text-gray-300">
+                Një vend ku matematika bëhet argëtuese dhe sfiduese! 
+                Mësoni, praktikoni dhe garoni për të përmirësuar aftësitë tuaja.
+            </p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Linqe të Shpejta</h3>
+            <ul class="space-y-2">
+                <li><a href="index.html" class="hover:text-[#D42027] transition">🏠 Kreu</a></li>
+                <li><a href="cards.html" class="hover:text-[#D42027] transition">📖 Kartat Interaktive</a></li>
+                <li><a href="materiale.html" class="hover:text-[#D42027] transition">📝 Materiale</a></li>
+                <li><a href="leaderboard.html" class="hover:text-[#D42027] transition">🏆 Tabela e Pikëve</a></li>
+                <li><a href="aktivitetet.html" class="hover:text-[#D42027] transition">📅 Aktivitetet</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3: Contact Info -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Na Kontaktoni</h3>
+            <p class="text-gray-300">📧 Email: <a href="mailto:math@mileniumi3.net" class="text-[#D42027] font-semibold hover:underline">math@mileniumi3.net</a></p>
+            <p class="text-gray-300">📍 Adresa: Prishtinë, Kosovë</p>
+        </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="text-center text-gray-400 text-sm mt-8 border-t border-gray-600 pt-4">
+        © 2025 Klubi i Matematikës | Të gjitha të drejtat e rezervuara.
+    </div>
+</footer>
+
 </html>

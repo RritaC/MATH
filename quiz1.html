@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuizi: Ekuacionet Kuadratike</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .correct { background-color: #4CAF50 !important; color: white !important; }
+        .incorrect { background-color: #E74C3C !important; color: white !important; }
+        .disabled { pointer-events: none; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-white text-gray-700 py-4 fixed w-full top-0 left-0 z-20 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 hover:text-[#D42027] transition">
+                <img src="logo.png" alt="Logo" class="h-8">
+                <span class="text-2xl font-bold cursor-pointer">Klubi i Matematikës</span>
+            </a>
+            <div class="space-x-6">
+                <a href="cards.html" class="hover:text-[#D42027] transition">Kartat Interaktive</a>
+                <a href="materiale.html" class="hover:text-[#D42027] transition">Materiale</a>
+                <a href="videos.html" class="hover:text-[#D42027] transition">Video</a>
+                <a href="leaderboard.html" class="hover:text-[#D42027] transition">Tabela e Pikëve</a>
+                <a href="aktivitetet.html" class="hover:text-[#D42027] transition">Aktivitetet</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Quiz Section -->
+    <section class="container mx-auto py-20 mt-12">
+        <h2 class="text-4xl font-bold text-center mb-6">Kuizi: Ekuacionet Kuadratike</h2>
+        <p class="text-center text-gray-600 mb-10">Zgjidhni përgjigjen e saktë për secilën pyetje për të fituar pikë! 🎯</p>
+
+        <!-- Quiz Container -->
+        <div class="max-w-3xl mx-auto bg-white p-8 shadow-md rounded-lg">
+            <div id="quiz-container">
+                <!-- Question will be inserted here dynamically -->
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between mt-6">
+                <button id="prev-btn" class="bg-gray-400 text-white py-2 px-6 rounded shadow hover:bg-gray-600 transition hidden">
+                    ⬅️ Prapa
+                </button>
+                <button id="next-btn" class="bg-[#D42027] text-white py-2 px-6 rounded shadow hover:bg-[#A61C1F] transition hidden">
+                    Tjetra ➡️
+                </button>
+            </div>
+
+            <!-- Score & Completion Message -->
+            <div id="result" class="text-center mt-6 hidden">
+                <h3 class="text-2xl font-bold">Pikët tuaja: <span id="score">0</span>/5 🎉</h3>
+                <p class="mt-2 text-gray-700">Bravo! Mund të provoni kuize të tjera për të fituar më shumë pikë.</p>
+                <a href="quizzes.html" class="mt-4 inline-block bg-[#D42027] text-white py-2 px-6 rounded shadow hover:bg-[#A61C1F] transition">
+                    Kthehu te Kuizet
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Quiz Questions
+        const quizData = [
+            {
+                question: "Cila është formula për zgjidhjen e ekuacionit kuadratik?",
+                options: [
+                    "x = (-b ± √(b² - 4ac)) / 2a",
+                    "x = b² - 4ac",
+                    "x = a² + b² = c²",
+                    "x = b ± √(a² - 4ac)"
+                ],
+                correct: 0
+            },
+            {
+                question: "Nëse një ekuacion kuadratik ka diskriminantin D = 0, sa rrënjë ka?",
+                options: [
+                    "Dy rrënjë reale të ndryshme",
+                    "Një rrënjë reale të vetme",
+                    "Dy rrënjë komplekse",
+                    "Nuk ka rrënjë"
+                ],
+                correct: 1
+            },
+            {
+                question: "Çka përfaqëson diskriminanti në ekuacionin kuadratik?",
+                options: [
+                    "Numrin e rrënjëve të mundshme",
+                    "Shumën e rrënjëve",
+                    "Produktin e rrënjëve",
+                    "Shpejtësinë e llogaritjes së ekuacionit"
+                ],
+                correct: 0
+            },
+            {
+                question: "Cili ekuacion është ekuacion kuadratik?",
+                options: [
+                    "x + 5 = 0",
+                    "x² - 4x + 4 = 0",
+                    "2x³ - 4x + 6 = 0",
+                    "3x - 2 = 0"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cili nga ekuacionet ka rrënjë të ndryshme reale?",
+                options: [
+                    "x² + 4 = 0",
+                    "x² - 6x + 9 = 0",
+                    "x² - 5x + 6 = 0",
+                    "x² + 9 = 0"
+                ],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const quizContainer = document.getElementById("quiz-container");
+        const nextBtn = document.getElementById("next-btn");
+        const prevBtn = document.getElementById("prev-btn");
+        const resultContainer = document.getElementById("result");
+        const scoreText = document.getElementById("score");
+
+        function loadQuestion() {
+            if (currentQuestion >= quizData.length) {
+                quizContainer.style.display = "none";
+                resultContainer.classList.remove("hidden");
+                scoreText.innerText = score;
+                return;
+            }
+
+            const questionData = quizData[currentQuestion];
+            quizContainer.innerHTML = `
+                <h3 class="text-xl font-bold mb-4">${questionData.question}</h3>
+                <div class="space-y-3">
+                    ${questionData.options.map((option, index) => `
+                        <button class="block w-full text-left p-3 border rounded-lg hover:bg-gray-200 transition" 
+                            onclick="checkAnswer(${index}, this)">
+                            ${option}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+
+            prevBtn.classList.toggle("hidden", currentQuestion === 0);
+            nextBtn.classList.add("hidden");
+        }
+
+        function checkAnswer(selectedIndex, buttonElement) {
+            const correctIndex = quizData[currentQuestion].correct;
+            const buttons = quizContainer.querySelectorAll("button");
+
+            buttons.forEach((btn, index) => {
+                btn.classList.add("disabled");
+                if (index === correctIndex) {
+                    btn.classList.add("correct");
+                } else if (index === selectedIndex) {
+                    btn.classList.add("incorrect");
+                }
+            });
+
+            if (selectedIndex === correctIndex) {
+                score += 1;
+            }
+            
+            nextBtn.classList.remove("hidden");
+        }
+
+        nextBtn.addEventListener("click", () => {
+            currentQuestion++;
+            loadQuestion();
+        });
+
+        prevBtn.addEventListener("click", () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        });
+
+        // Load first question on page load
+        loadQuestion();
+    </script>
+
+</body>
+
+<!-- Footer -->
+<footer class="bg-[#1E3A5F] text-white py-8 mt-16">
+    <div class="container mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left">
+        <!-- Column 1: About -->
+        <div>
+            <h3 class="text-2xl font-bold mb-4">Klubi i Matematikës</h3>
+            <p class="text-gray-300">
+                Një vend ku matematika bëhet argëtuese dhe sfiduese! 
+                Mësoni, praktikoni dhe garoni për të përmirësuar aftësitë tuaja.
+            </p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Linqe të Shpejta</h3>
+            <ul class="space-y-2">
+                <li><a href="index.html" class="hover:text-[#D42027] transition">🏠 Kreu</a></li>
+                <li><a href="cards.html" class="hover:text-[#D42027] transition">📖 Kartat Interaktive</a></li>
+                <li><a href="materiale.html" class="hover:text-[#D42027] transition">📝 Materiale</a></li>
+                <li><a href="leaderboard.html" class="hover:text-[#D42027] transition">🏆 Tabela e Pikëve</a></li>
+                <li><a href="aktivitetet.html" class="hover:text-[#D42027] transition">📅 Aktivitetet</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3: Contact Info -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Na Kontaktoni</h3>
+            <p class="text-gray-300">📧 Email: <a href="mailto:math@mileniumi3.net" class="text-[#D42027] font-semibold hover:underline">math@mileniumi3.net</a></p>
+            <p class="text-gray-300">📍 Adresa: Prishtinë, Kosovë</p>
+        </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="text-center text-gray-400 text-sm mt-8 border-t border-gray-600 pt-4">
+        © 2025 Klubi i Matematikës | Të gjitha të drejtat e rezervuara.
+    </div>
+</footer>
+
+</html>

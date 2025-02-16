@@ -6,109 +6,249 @@
     <title>Leaderboard - Klubi i Matematikës</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .gold { background-color: #FFD700; }
-        .silver { background-color: #C0C0C0; }
-        .bronze { background-color: #CD7F32; }
-        .primary-color { color: #00334E; } /* Example color from logo */
-        .secondary-color { color: #D42027; } /* Example color from logo */
+        /* Scrollable container with visible scrollbar */
+        .scroll-container {
+            max-height: 500px;
+            overflow-y: auto;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: #D42027 #f0f0f0; /* Custom scrollbar */
+        }
+
+        /* Custom Scrollbar for Chrome, Edge, and Safari */
+        .scroll-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #D42027;
+            border-radius: 4px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f0f0f0;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        /* Fixed header */
+        thead {
+            background-color: #D42027;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Row hover effect */
+        tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Special colors for top ranks */
+        .gold { color: #D4AF37; font-weight: bold; }
+        .silver { color: #C0C0C0; font-weight: bold; }
+        .bronze { color: #CD7F32; font-weight: bold; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
     <!-- Navigation -->
-    <nav class="bg-white py-4 fixed w-full top-0 left-0 z-20 shadow-md">
+    <nav class="bg-white text-gray-700 py-4 fixed w-full top-0 left-0 z-20 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <img src="logo.png" alt="Logo" class="h-8">
-            <div class="text-2xl font-bold primary-color">Klubi i Matematikës</div>
+            <a href="index.html" class="flex items-center space-x-2 hover:text-[#D42027] transition">
+                <img src="logo.png" alt="Logo" class="h-8">
+                <span class="text-2xl font-bold cursor-pointer">Klubi i Matematikës</span>
+            </a>
             <div class="space-x-6">
-                <a href="index.html" class="hover:text-secondary-color transition">Kreu</a>
-                <a href="cards.html" class="hover:text-secondary-color transition">Kartat Interaktive</a>
-                <a href="videos.html" class="hover:text-secondary-color transition">Video</a>
-                <a href="leaderboard.html" class="font-bold secondary-color">Tabela e Pikëve</a>
+                <a href="cards.html" class="hover:text-[#D42027] transition">Kartat Interaktive</a>
+                <a href="materiale.html" class="hover:text-[#D42027] transition">Materiale</a>
+                <a href="videos.html" class="hover:text-[#D42027] transition">Video</a>
+                <a href="leaderboard.html" class="font-bold text-[#D42027]">Tabela e Pikëve</a>
+                <a href="aktivitetet.html" class="hover:text-[#D42027] transition">Aktivitetet</a>
             </div>
         </div>
     </nav>
 
+
     <!-- Leaderboard Section -->
     <section class="container mx-auto py-20 mt-12">
-        <h2 class="text-4xl font-bold text-center primary-color mb-6">Tabela e Pikëve</h2>
-        <p class="text-center text-gray-600 mb-12">Garoni me shokët tuaj dhe fitoni pikë duke zgjidhur ushtrime!</p>
+        <h2 class="text-4xl font-bold text-center mb-4">Tabela e Pikëve</h2>
+        
+        <!-- Explanation Text -->
+        <div class="max-w-3xl mx-auto text-center text-gray-700 mb-8">
+            <p>
+                Fitoni pikë duke zgjidhur ushtrime, përfunduar kuize dhe duke kontribuar në diskutime! 
+                Çdo problem i zgjidhur saktë ju jep <strong>+10 pikë</strong>, ndërsa një quiz i përfunduar jep 
+                <strong>+50 pikë</strong>.
+            </p>
+            <p class="mt-4">
+                Tre studentët më të mirë të çdo muaji fitojnë medalje 🏆 dhe çmime speciale si: 
+                <span class="text-[#D42027] font-bold">Certifikata e Ekselencës</span>, 
+                <span class="text-[#D42027] font-bold">Pajisje shkollore</span> dhe 
+                <span class="text-[#D42027] font-bold">Një përvojë speciale mësimore!</span>
+            </p>
+            <p class="mt-4">
+                Vazhdoni të fitoni pikë dhe ngjituni në tabelën e pikëve! 📈🔥
+            </p>
+        </div>
 
-        <!-- Leaderboard Table -->
-        <div class="overflow-x-auto">
-            <table class="w-full max-w-6xl mx-auto bg-white shadow-md rounded-lg">
-                <thead class="bg-primary-color text-white">
+        <!-- Scrollable Table -->
+        <div class="scroll-container bg-white shadow-md rounded-lg overflow-auto">
+            <table>
+                <thead>
                     <tr>
-                        <th class="py-3 px-6 text-left cursor-pointer" onclick="sortTable(0)">Pozicioni</th>
-                        <th class="py-3 px-6 text-left cursor-pointer" onclick="sortTable(1)">Emri</th>
-                        <th class="py-3 px-6 text-left cursor-pointer" onclick="sortTable(2)">Pikët</th>
-                        <th class="py-3 px-6 text-left">Medalja</th>
+                        <th>Pozicioni</th>
+                        <th>Emri</th>
+                        <th>Pikët</th>
+                        <th>Medalja</th>
                     </tr>
                 </thead>
-                <tbody id="leaderboardBody">
-                    <!-- Example Rows -->
+                <tbody>
                     <tr class="gold">
-                        <td class="py-3 px-6">1</td>
-                        <td class="py-3 px-6">Arta K.</td>
-                        <td class="py-3 px-6">940</td>
-                        <td class="py-3 px-6">🥇 Ari</td>
+                        <td>🥇 1</td>
+                        <td>Arta K.</td>
+                        <td>940</td>
+                        <td>🥇 Ari</td>
                     </tr>
                     <tr class="silver">
-                        <td class="py-3 px-6">2</td>
-                        <td class="py-3 px-6">Besart R.</td>
-                        <td class="py-3 px-6">870</td>
-                        <td class="py-3 px-6">🥈 Argjend</td>
+                        <td>🥈 2</td>
+                        <td>Besart R.</td>
+                        <td>870</td>
+                        <td>🥈 Argjend</td>
                     </tr>
                     <tr class="bronze">
-                        <td class="py-3 px-6">3</td>
-                        <td class="py-3 px-6">Ema L.</td>
-                        <td class="py-3 px-6">820</td>
-                        <td class="py-3 px-6">🥉 Bronzi</td>
-                    </tr>
-                    <!-- Additional Example Rows -->
-                    <tr>
-                        <td class="py-3 px-6">4</td>
-                        <td class="py-3 px-6">Luan T.</td>
-                        <td class="py-3 px-6">780</td>
-                        <td class="py-3 px-6">⭐</td>
+                        <td>🥉 3</td>
+                        <td>Ema L.</td>
+                        <td>820</td>
+                        <td>🥉 Bronzi</td>
                     </tr>
                     <tr>
-                        <td class="py-3 px-6">5</td>
-                        <td class="py-3 px-6">Mira S.</td>
-                        <td class="py-3 px-6">730</td>
-                        <td class="py-3 px-6">⭐</td>
+                        <td>4</td>
+                        <td>Luan T.</td>
+                        <td>780</td>
+                        <td>⭐</td>
                     </tr>
-                    <!-- Add more rows as needed -->
+                    <tr>
+                        <td>5</td>
+                        <td>Mira S.</td>
+                        <td>730</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Arjan B.</td>
+                        <td>700</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Tina M.</td>
+                        <td>670</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Elira P.</td>
+                        <td>640</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Donat J.</td>
+                        <td>620</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Shpresa L.</td>
+                        <td>600</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Rina D.</td>
+                        <td>580</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Ermal Q.</td>
+                        <td>560</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Klevis H.</td>
+                        <td>540</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>Viola X.</td>
+                        <td>520</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Gerti F.</td>
+                        <td>500</td>
+                        <td>⭐</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </section>
 
-    <script>
-        function sortTable(columnIndex) {
-            const table = document.getElementById('leaderboardBody');
-            const rows = Array.from(table.rows);
-
-            // Determine sort direction
-            let ascending = true;
-            if (table.getAttribute('data-sort') === 'asc') {
-                ascending = false;
-                table.setAttribute('data-sort', 'desc');
-            } else {
-                table.setAttribute('data-sort', 'asc');
-            }
-
-            // Sort rows based on the specified column
-            rows.sort((a, b) => {
-                const aValue = a.cells[columnIndex].innerText;
-                const bValue = b.cells[columnIndex].innerText;
-                return ascending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
-            });
-
-            // Re-append sorted rows to the table
-            rows.forEach(row => table.appendChild(row));
-        }
-    </script>
-
 </body>
+
+<!-- Footer -->
+<footer class="bg-[#1E3A5F] text-white py-8 mt-16">
+    <div class="container mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left">
+        <!-- Column 1: About -->
+        <div>
+            <h3 class="text-2xl font-bold mb-4">Klubi i Matematikës</h3>
+            <p class="text-gray-300">
+                Një vend ku matematika bëhet argëtuese dhe sfiduese! 
+                Mësoni, praktikoni dhe garoni për të përmirësuar aftësitë tuaja.
+            </p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Linqe të Shpejta</h3>
+            <ul class="space-y-2">
+                <li><a href="index.html" class="hover:text-[#D42027] transition">🏠 Kreu</a></li>
+                <li><a href="cards.html" class="hover:text-[#D42027] transition">📖 Kartat Interaktive</a></li>
+                <li><a href="materiale.html" class="hover:text-[#D42027] transition">📝 Materiale</a></li>
+                <li><a href="leaderboard.html" class="hover:text-[#D42027] transition">🏆 Tabela e Pikëve</a></li>
+                <li><a href="aktivitetet.html" class="hover:text-[#D42027] transition">📅 Aktivitetet</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3: Contact Info -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Na Kontaktoni</h3>
+            <p class="text-gray-300">📧 Email: <a href="mailto:math@mileniumi3.net" class="text-[#D42027] font-semibold hover:underline">math@mileniumi3.net</a></p>
+            <p class="text-gray-300">📍 Adresa: Prishtinë, Kosovë</p>
+        </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="text-center text-gray-400 text-sm mt-8 border-t border-gray-600 pt-4">
+        © 2025 Klubi i Matematikës | Të gjitha të drejtat e rezervuara.
+    </div>
+</footer>
+
 </html>

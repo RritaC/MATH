@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuize - Klubi i Matematikës</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .active { background-color: #D42027 !important; color: white !important; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-white text-gray-700 py-4 fixed w-full top-0 left-0 z-20 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 hover:text-[#D42027] transition">
+                <img src="logo.png" alt="Logo" class="h-8">
+                <span class="text-2xl font-bold cursor-pointer">Klubi i Matematikës</span>
+            </a>
+            <div class="space-x-6">
+                <a href="cards.html" class="hover:text-[#D42027] transition">Kartat Interaktive</a>
+                <a href="materiale.html" class="font-bold text-[#D42027]">Materiale</a>
+                <a href="videos.html" class="hover:text-[#D42027] transition">Video</a>
+                <a href="leaderboard.html" class="hover:text-[#D42027] transition">Tabela e Pikëve</a>
+                <a href="aktivitetet.html" class="hover:text-[#D42027] transition">Aktivitetet</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Quiz Selection -->
+    <section class="container mx-auto py-20 mt-12">
+        <h2 class="text-4xl font-bold text-center mb-6">Zgjidhni Klasën</h2>
+        <p class="text-center text-gray-600 mb-10">Klikoni mbi klasën tuaj për të parë kuizet e dedikuara.</p>
+
+        <!-- Class Selection Buttons -->
+        <div class="flex justify-center space-x-4">
+            <button class="class-btn bg-gray-300 text-gray-800 py-2 px-4 rounded shadow hover:bg-gray-400 transition" onclick="showQuizzes('klasa5')">Klasa 5</button>
+            <button class="class-btn bg-gray-300 text-gray-800 py-2 px-4 rounded shadow hover:bg-gray-400 transition" onclick="showQuizzes('klasa6')">Klasa 6</button>
+            <button class="class-btn bg-gray-300 text-gray-800 py-2 px-4 rounded shadow hover:bg-gray-400 transition" onclick="showQuizzes('klasa7')">Klasa 7</button>
+        </div>
+    </section>
+
+    <!-- Quizzes Section -->
+    <section class="container mx-auto py-10">
+        <h2 class="text-3xl font-bold text-center mb-6">Kuize Matematike</h2>
+        <p class="text-center text-gray-600 mb-6">
+            Zgjidhni një kuiz nga klasa juaj për të testuar njohuritë! 📝🔥
+        </p>
+
+        <!-- Quizzes for Each Class -->
+        <div id="klasa5" class="quiz-container hidden grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                <h3 class="text-2xl font-bold text-gray-800">Numrat Natyrorë</h3>
+                <a href="quiz1.html" class="bg-[#D42027] text-white py-2 px-6 rounded mt-4 inline-block hover:bg-[#A61C1F] transition">
+                    Fillo Kuizin
+                </a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                <h3 class="text-2xl font-bold text-gray-800">Fraksionet</h3>
+                <a href="quiz2.html" class="bg-[#D42027] text-white py-2 px-6 rounded mt-4 inline-block hover:bg-[#A61C1F] transition">
+                    Fillo Kuizin
+                </a>
+            </div>
+        </div>
+
+        <div id="klasa6" class="quiz-container hidden grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                <h3 class="text-2xl font-bold text-gray-800">Ekuacionet e Thjeshta</h3>
+                <a href="quiz3.html" class="bg-[#D42027] text-white py-2 px-6 rounded mt-4 inline-block hover:bg-[#A61C1F] transition">
+                    Fillo Kuizin
+                </a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                <h3 class="text-2xl font-bold text-gray-800">Gjeometria</h3>
+                <a href="quiz4.html" class="bg-[#D42027] text-white py-2 px-6 rounded mt-4 inline-block hover:bg-[#A61C1F] transition">
+                    Fillo Kuizin
+                </a>
+            </div>
+        </div>
+
+        <div id="klasa7" class="quiz-container hidden grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                <h3 class="text-2xl font-bold text-gray-800">Algjebra</h3>
+                <a href="quiz5.html" class="bg-[#D42027] text-white py-2 px-6 rounded mt-4 inline-block hover:bg-[#A61C1F] transition">
+                    Fillo Kuizin
+                </a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                <h3 class="text-2xl font-bold text-gray-800">Logaritmet</h3>
+                <a href="quiz6.html" class="bg-[#D42027] text-white py-2 px-6 rounded mt-4 inline-block hover:bg-[#A61C1F] transition">
+                    Fillo Kuizin
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function showQuizzes(className) {
+            // Hide all quiz sections
+            document.querySelectorAll('.quiz-container').forEach(container => {
+                container.classList.add('hidden');
+            });
+
+            // Remove active button style from all buttons
+            document.querySelectorAll('.class-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected class's quizzes
+            document.getElementById(className).classList.remove('hidden');
+
+            // Add active button style
+            event.target.classList.add('active');
+        }
+    </script>
+
+</body>
+
+
+<!-- Footer -->
+<footer class="bg-[#1E3A5F] text-white py-8 mt-16">
+    <div class="container mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left">
+        <!-- Column 1: About -->
+        <div>
+            <h3 class="text-2xl font-bold mb-4">Klubi i Matematikës</h3>
+            <p class="text-gray-300">
+                Një vend ku matematika bëhet argëtuese dhe sfiduese! 
+                Mësoni, praktikoni dhe garoni për të përmirësuar aftësitë tuaja.
+            </p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Linqe të Shpejta</h3>
+            <ul class="space-y-2">
+                <li><a href="index.html" class="hover:text-[#D42027] transition">🏠 Kreu</a></li>
+                <li><a href="cards.html" class="hover:text-[#D42027] transition">📖 Kartat Interaktive</a></li>
+                <li><a href="materiale.html" class="hover:text-[#D42027] transition">📝 Materiale</a></li>
+                <li><a href="leaderboard.html" class="hover:text-[#D42027] transition">🏆 Tabela e Pikëve</a></li>
+                <li><a href="aktivitetet.html" class="hover:text-[#D42027] transition">📅 Aktivitetet</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3: Contact Info -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Na Kontaktoni</h3>
+            <p class="text-gray-300">📧 Email: <a href="mailto:math@mileniumi3.net" class="text-[#D42027] font-semibold hover:underline">math@mileniumi3.net</a></p>
+            <p class="text-gray-300">📍 Adresa: Prishtinë, Kosovë</p>
+        </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="text-center text-gray-400 text-sm mt-8 border-t border-gray-600 pt-4">
+        © 2025 Klubi i Matematikës | Të gjitha të drejtat e rezervuara.
+    </div>
+</footer>
+
+</html>
