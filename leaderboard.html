@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - Klubi i Matematikës</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gold { background-color: #FFD700; }
+        .silver { background-color: #C0C0C0; }
+        .bronze { background-color: #CD7F32; }
+        .primary-color { color: #00334E; } /* Example color from logo */
+        .secondary-color { color: #D42027; } /* Example color from logo */
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-white py-4 fixed w-full top-0 left-0 z-20 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <img src="logo.png" alt="Logo" class="h-8">
+            <div class="text-2xl font-bold primary-color">Klubi i Matematikës</div>
+            <div class="space-x-6">
+                <a href="index.html" class="hover:text-secondary-color transition">Kreu</a>
+                <a href="cards.html" class="hover:text-secondary-color transition">Kartat Interaktive</a>
+                <a href="videos.html" class="hover:text-secondary-color transition">Video</a>
+                <a href="leaderboard.html" class="font-bold secondary-color">Tabela e Pikëve</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Leaderboard Section -->
+    <section class="container mx-auto py-20 mt-12">
+        <h2 class="text-4xl font-bold text-center primary-color mb-6">Tabela e Pikëve</h2>
+        <p class="text-center text-gray-600 mb-12">Garoni me shokët tuaj dhe fitoni pikë duke zgjidhur ushtrime!</p>
+
+        <!-- Leaderboard Table -->
+        <div class="overflow-x-auto">
+            <table class="w-full max-w-6xl mx-auto bg-white shadow-md rounded-lg">
+                <thead class="bg-primary-color text-white">
+                    <tr>
+                        <th class="py-3 px-6 text-left cursor-pointer" onclick="sortTable(0)">Pozicioni</th>
+                        <th class="py-3 px-6 text-left cursor-pointer" onclick="sortTable(1)">Emri</th>
+                        <th class="py-3 px-6 text-left cursor-pointer" onclick="sortTable(2)">Pikët</th>
+                        <th class="py-3 px-6 text-left">Medalja</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                    <!-- Example Rows -->
+                    <tr class="gold">
+                        <td class="py-3 px-6">1</td>
+                        <td class="py-3 px-6">Arta K.</td>
+                        <td class="py-3 px-6">940</td>
+                        <td class="py-3 px-6">🥇 Ari</td>
+                    </tr>
+                    <tr class="silver">
+                        <td class="py-3 px-6">2</td>
+                        <td class="py-3 px-6">Besart R.</td>
+                        <td class="py-3 px-6">870</td>
+                        <td class="py-3 px-6">🥈 Argjend</td>
+                    </tr>
+                    <tr class="bronze">
+                        <td class="py-3 px-6">3</td>
+                        <td class="py-3 px-6">Ema L.</td>
+                        <td class="py-3 px-6">820</td>
+                        <td class="py-3 px-6">🥉 Bronzi</td>
+                    </tr>
+                    <!-- Additional Example Rows -->
+                    <tr>
+                        <td class="py-3 px-6">4</td>
+                        <td class="py-3 px-6">Luan T.</td>
+                        <td class="py-3 px-6">780</td>
+                        <td class="py-3 px-6">⭐</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-6">5</td>
+                        <td class="py-3 px-6">Mira S.</td>
+                        <td class="py-3 px-6">730</td>
+                        <td class="py-3 px-6">⭐</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script>
+        function sortTable(columnIndex) {
+            const table = document.getElementById('leaderboardBody');
+            const rows = Array.from(table.rows);
+
+            // Determine sort direction
+            let ascending = true;
+            if (table.getAttribute('data-sort') === 'asc') {
+                ascending = false;
+                table.setAttribute('data-sort', 'desc');
+            } else {
+                table.setAttribute('data-sort', 'asc');
+            }
+
+            // Sort rows based on the specified column
+            rows.sort((a, b) => {
+                const aValue = a.cells[columnIndex].innerText;
+                const bValue = b.cells[columnIndex].innerText;
+                return ascending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            });
+
+            // Re-append sorted rows to the table
+            rows.forEach(row => table.appendChild(row));
+        }
+    </script>
+
+</body>
+</html>

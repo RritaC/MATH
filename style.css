@@ -1,0 +1,115 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #2b3a67;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+nav .logo {
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.1em;
+    transition: 0.3s;
+}
+.nav-links a:hover {
+    color: #f5c518;
+}
+.main-content {
+    padding-top: 80px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 120px 20px;
+    background: linear-gradient(135deg, #4A90E2, #80C3FF);
+    color: white;
+    background-image: url('https://source.unsplash.com/1600x900/?mathematics,geometry');
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+.hero h1 {
+    font-size: 3.5em;
+}
+.hero p {
+    font-size: 1.4em;
+}
+.hero .cta-buttons a {
+    background-color: white;
+    color: #4A90E2;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px;
+}
+.hero .cta-buttons a:hover {
+    background-color: #f5c518;
+    color: white;
+}
+
+/* About Section */
+.about {
+    padding: 50px 20px;
+    text-align: center;
+}
+.about h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+.about ul {
+    list-style-type: none;
+    padding: 0;
+}
+.about ul li {
+    font-size: 1.2em;
+    padding: 10px 0;
+}
+
+/* Fun Section with Images */
+.fun-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+.fun-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+.images-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.images-row img {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+.footer {
+    background-color: #2b3a67;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
