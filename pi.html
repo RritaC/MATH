@@ -7,52 +7,62 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         #piNumbers {
-            user-select: none; /* Prevent text selection */
+            user-select: none;
         }
         #userInput:disabled {
             background-color: #f3f4f6;
             cursor: not-allowed;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
     
-    <!-- Navigation -->
     <nav class="bg-white text-gray-700 py-4 fixed w-full top-0 left-0 z-20 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2 hover:text-[#D42027] transition">
-                <img src="logo.png" alt="Logo" class="h-8">
-                <span class="text-2xl font-bold cursor-pointer">Klubi i Matematikës</span>
-            </a>
-            <div class="space-x-6">
-                <a href="cards.html" class="hover:text-[#D42027] transition">Kartat Interaktive</a>
-                <a href="materiale.html" class="hover:text-[#D42027] transition">Materiale</a>
-                <a href="videos.html" class="hover:text-[#D42027] transition">Video</a>
-                <a href="leaderboard.html" class="hover:text-[#D42027] transition">Tabela e Pikëve</a>
-                <a href="aktivitetet.html" class="hover:text-[#D42027] transition">Aktivitetet</a>
-            </div>
+            <a href="index.html" class="text-2xl font-bold cursor-pointer">Klubi i Matematikës</a>
+            <a href="leaderboard.html" class="hover:text-[#D42027] transition">Tabela e Pikëve</a>
         </div>
     </nav>
 
-    <!-- Main Section -->
-    <section class="py-20 mt-20 container mx-auto text-center">
-        <h1 class="text-4xl font-bold text-gray-800">Sfida e Kujtesës së Pi-së</h1>
-        <p class="mt-4 text-lg text-gray-600">Mbaj mend sa më shumë shifra të Pi-së!</p>
-        
-        <div class="mt-8 bg-white shadow-lg p-8 rounded-lg max-w-2xl mx-auto">
-            <div id="piNumbers" class="text-2xl font-mono p-4 bg-gray-200 rounded-md">
-                3.1415926535897932384<br>62643383279502884197
+    <section class="py-20 mt-20 container mx-auto flex">
+        <!-- Lojë -->
+        <div class="w-2/3 text-center">
+            <h1 class="text-4xl font-bold">Sfida e Kujtesës së Pi-së</h1>
+            <p class="mt-4 text-lg text-gray-600">Mbaj mend sa më shumë shifra të Pi-së!</p>
+            
+            <div class="mt-8 bg-white shadow-lg p-8 rounded-lg max-w-2xl mx-auto">
+                <!-- Input për emrin e lojtarit -->
+                <div class="flex items-center justify-center space-x-2">
+                    <input id="playerName" type="text" placeholder="Shkruaj emrin tënd..." 
+                        class="p-2 border rounded-md text-lg text-center w-2/3" />
+                    <button id="confirmNameBtn" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+                        ✔
+                    </button>
+                </div>
+                
+                <div id="piNumbers" class="mt-4 text-2xl font-mono p-4 bg-gray-200 rounded-md">
+                    3.1415926535897932384<br>62643383279502884197
+                </div>
+                <p id="timerContainer" class="mt-2 text-lg font-semibold hidden">Koha e mbetur: <span id="timer" class="text-red-500">10</span> sekonda</p>
+                
+                <input id="userInput" type="text" placeholder="Shkruaj shifrat..." disabled 
+                    class="mt-4 p-2 w-full border rounded-md text-lg text-center" />
+                <button id="submitBtn" class="mt-4 bg-[#D42027] text-white px-6 py-2 rounded-lg hover:bg-[#B71B21] transition">Verifiko</button>
+                
+                <p id="resultMessage" class="mt-4 font-bold text-lg"></p>
+                <p id="scoreMessage" class="mt-2 text-gray-700"></p>
             </div>
-            <p class="text-sm text-gray-500 mt-2">Tregohen për një kohë të shkurtër dhe pastaj fshihen për të shënuar numrat</p>
-            <p id="timerContainer" class="mt-2 text-lg font-semibold">Koha e mbetur: <span id="timer" class="text-red-500">10</span> sekonda</p>
-            <input id="userInput" type="text" placeholder="Shkruaj shifrat..." disabled 
-                   class="mt-4 p-2 w-full border rounded-md text-lg text-center" />
-            <button id="submitBtn" class="mt-4 bg-[#D42027] text-white px-6 py-2 rounded-lg hover:bg-[#B71B21] transition">Verifiko</button>
-            <p id="resultMessage" class="mt-4 font-bold text-lg"></p>
-            <p id="scoreMessage" class="mt-2 text-gray-700"></p>
+        </div>
+
+        <!-- Scoreboard -->
+        <div class="w-1/3 bg-white shadow-lg p-6 rounded-lg ml-6">
+            <h2 class="text-2xl font-bold">Tabela e Pikëve</h2>
+            <ul id="scoreboard" class="mt-4 text-lg"></ul>
         </div>
     </section>
-
 
     <script>
         const piNumbers = document.getElementById("piNumbers");
@@ -62,27 +72,54 @@
         const scoreMessage = document.getElementById("scoreMessage");
         const timerElement = document.getElementById("timer");
         const timerContainer = document.getElementById("timerContainer");
-        
+        const playerNameInput = document.getElementById("playerName");
+        const confirmNameBtn = document.getElementById("confirmNameBtn");
+        const scoreboard = document.getElementById("scoreboard");
+
         let timeLeft = 10;
         const correctAnswer = "3.141592653589793238462643383279502884197";
-        
-        // Disable input during countdown
         userInput.disabled = true;
-        
-        // Timer countdown
-        const timerInterval = setInterval(() => {
-            timeLeft--;
-            timerElement.textContent = timeLeft;
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                piNumbers.textContent = "";
-                userInput.disabled = false;
-                userInput.focus();
-                timerContainer.style.display = "none"; // Hide the timer indicator
+
+        function updateScoreboard() {
+            const scores = JSON.parse(localStorage.getItem("scores")) || [];
+            scoreboard.innerHTML = scores
+                .sort((a, b) => b.score - a.score)
+                .map(score => `<li>${score.name}: <strong>${score.score}</strong> shifra</li>`)
+                .join("");
+        }
+
+        function startGame() {
+            let timerInterval = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    piNumbers.textContent = "";
+                    userInput.disabled = false;
+                    userInput.focus();
+                    timerContainer.style.display = "none"; 
+                }
+            }, 1000);
+        }
+
+        confirmNameBtn.addEventListener("click", () => {
+            if (!playerNameInput.value.trim()) {
+                alert("Ju lutem shkruani emrin para se të filloni!");
+                return;
             }
-        }, 1000);
-        
+            confirmNameBtn.disabled = true;
+            playerNameInput.disabled = true;
+            timerContainer.classList.remove("hidden");
+            startGame();
+        });
+
         submitBtn.addEventListener("click", () => {
+            const playerName = playerNameInput.value.trim();
+            if (!playerName) {
+                alert("Shkruani emrin para se të luani!");
+                return;
+            }
+
             const userAnswer = userInput.value.trim();
             let resultHTML = "";
             let correctCount = 0;
@@ -98,45 +135,15 @@
             
             resultMessage.innerHTML = `Rezultati: ${resultHTML}`;
             scoreMessage.innerHTML = `Ju keni mbajtur mend ${correctCount} shifra nga Pi!`;
+
+            let scores = JSON.parse(localStorage.getItem("scores")) || [];
+            scores.push({ name: playerName, score: correctCount });
+            localStorage.setItem("scores", JSON.stringify(scores));
+            updateScoreboard();
         });
+
+        updateScoreboard();
     </script>
+
 </body>
-
-<!-- Footer -->
-<footer class="bg-[#1E3A5F] text-white py-8 mt-16">
-    <div class="container mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left">
-        <!-- Column 1: About -->
-        <div>
-            <h3 class="text-2xl font-bold mb-4">Klubi i Matematikës</h3>
-            <p class="text-gray-300">
-                Një vend ku matematika bëhet argëtuese dhe sfiduese! 
-                Mësoni, praktikoni dhe garoni për të përmirësuar aftësitë tuaja.
-            </p>
-        </div>
-
-        <!-- Column 2: Quick Links -->
-        <div>
-            <h3 class="text-xl font-semibold mb-4">Linqe të Shpejta</h3>
-            <ul class="space-y-2">
-                <li><a href="index.html" class="hover:text-[#D42027] transition">🏠 Kreu</a></li>
-                <li><a href="cards.html" class="hover:text-[#D42027] transition">📖 Kartat Interaktive</a></li>
-                <li><a href="materiale.html" class="hover:text-[#D42027] transition">📝 Materiale</a></li>
-                <li><a href="leaderboard.html" class="hover:text-[#D42027] transition">🏆 Tabela e Pikëve</a></li>
-                <li><a href="aktivitetet.html" class="hover:text-[#D42027] transition">📅 Aktivitetet</a></li>
-            </ul>
-        </div>
-
-        <!-- Column 3: Contact Info -->
-        <div>
-            <h3 class="text-xl font-semibold mb-4">Na Kontaktoni</h3>
-            <p class="text-gray-300">📧 Email: <a href="mailto:math@mileniumi3.net" class="text-[#D42027] font-semibold hover:underline">math@mileniumi3.net</a></p>
-            <p class="text-gray-300">📍 Adresa: Prishtinë, Kosovë</p>
-        </div>
-    </div>
-
-    <!-- Copyright Section -->
-    <div class="text-center text-gray-400 text-sm mt-8 border-t border-gray-600 pt-4">
-        © 2025 Klubi i Matematikës | Të gjitha të drejtat e rezervuara.
-    </div>
-</footer>
 </html>
